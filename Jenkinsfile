@@ -39,15 +39,15 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
-                        sh "docker build -t shantanu7478/loginwebappseven ."
-                        sh "docker push shantanu7478/loginwebappseven:latest"
+                        sh "docker build -t shantanu441/loginwebappseven ."
+                        sh "docker push shantanu441/loginwebappseven:latest"
                     }
                 }
             }
         }
         stage("TRIVY") {
             steps {
-                sh "trivy image shantanu7478/loginwebappseven:latest > trivyimage.txt"
+                sh "trivy image shantanu441/loginwebappseven:latest > trivyimage.txt"
             }
         }
         stage("Deploy using Docker container") {
@@ -55,7 +55,7 @@ pipeline {
                 sh """
                 # Remove container if it already exists to avoid errors
                 docker rm -f loginwebseven190 || true
-                docker run -d --name=loginwebseven190 -p 8084:8080 shantanu7478/loginwebappseven:latest
+                docker run -d --name=loginwebseven190 -p 8084:8080 shantanu441/loginwebappseven:latest
                 """
             }
         }
