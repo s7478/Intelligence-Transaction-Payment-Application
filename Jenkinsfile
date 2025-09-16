@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage("Git Checkout") {
             steps {
-                git branch: '*/main', changelog: false, poll: false, url: 'https://github.com/s7478/Intelligence-Transaction-Payment-Application.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/s7478/Intelligence-Transaction-Payment-Application.git'
             }
         }
         stage("Compile") {
