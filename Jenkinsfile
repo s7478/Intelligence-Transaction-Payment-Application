@@ -8,7 +8,7 @@ pipeline {
      stages{
         stage("Git Checkout"){
             steps{
-                git branch: 'master', changelog: false, poll: false, url: 'https://github.com/devops-catchup/I-Txn.git'
+                git branch: 'master', changelog: false, poll: false, url: 'https://github.com/s7478/Intelligence-Transaction-Payment-Application.git'
             }
         }
         stage("Compile"){
@@ -39,20 +39,20 @@ pipeline {
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
-                       sh "docker build -t swapnilhub/loginwebappseven ."
-                       sh "docker push swapnilhub/loginwebappseven:latest"
+                       sh "docker build -t shantanu441/loginwebappseven ."
+                       sh "docker push shantanu441/loginwebappseven:latest"
                     }
                 }
             }     
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image swapnilhub/loginwebappseven:latest > trivyimage.txt"
+                sh "trivy image shantanu441/loginwebappseven:latest > trivyimage.txt"
             }
         } 
         stage("Deploy using Docker container"){
             steps{
-                sh "docker run -d --name=loginwebseven190 -p 8084:8080 swapnilhub/loginwebappseven:latest"
+                sh "docker run -d --name=loginwebseven190 -p 8084:8080 shantanu441/loginwebappseven:latest"
             }
         }       
 }
